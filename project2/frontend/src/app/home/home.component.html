@@ -1,0 +1,202 @@
+<div class="home-content-main">
+
+
+  <header class="header">
+    <h2 class="heading top-main-head">Today's weather. Just right!</h2>
+    <div class="md-header">
+      <div class="search-bar">
+        <form class="form-style" (ngSubmit)="search()">
+          <input type="text" [(ngModel)]="searchTerm" id="search-input" required name="searchTerm"
+            placeholder="Enter country or city name" class="input-box" />
+          <button type="submit"><i id="btn" class="ri-search-line"></i></button>
+        </form>
+      </div>
+      <div class="right-icons">
+        <div>
+      <a (click)="logout()" style="cursor: pointer;">Logout</a>
+
+        </div>
+      </div>
+    </div>
+  </header>
+  <section class="hero-section">
+    <div class="leaflet-container">
+      <app-leaflet-map [searchTerm]="searchTerm" (updateMapData)="handleUpdateMapData($event)"
+        (updateCurrentLocData)="handleCurrentLocData($event)">
+      </app-leaflet-map>
+      <div class="temp-details">
+        <h1 class="deg main-head-check-heading">
+          {{
+          searchedLocation?.weatherData?.current?.temp_c
+          ? searchedLocation?.weatherData.current.temp_c + " °C"
+          : "N/A"
+          }}
+        </h1>
+        <p>
+          {{
+          searchedLocation?.weatherData?.location?.name
+          ? searchedLocation.weatherData.location.name +
+          ", " +
+          searchedLocation.weatherData.location.region +
+          ", " +
+          searchedLocation.weatherData.location.country
+          : "N/A"
+          }}
+        </p>
+      </div>
+      <div class="timings">
+        <p>
+          {{
+          searchedLocation?.weatherData?.current?.last_updated
+          ? searchedLocation?.weatherData.current.last_updated
+          : "N/A"
+          }}
+        </p>
+        <p>
+          {{
+          searchedLocation?.weatherData?.current?.condition?.text
+          ? searchedLocation?.weatherData.current.condition.text
+          : "N/A"
+          }}
+        </p>
+      </div>
+    </div>
+  </section>
+  <section class="end-section">
+    <div class="box-content">
+      <div class="box-icons">
+        <div>
+          <svg class="icon" fill="blue" height="800px" width="800px" version="1.1" id="Capa_1"
+            xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 328.611 328.611"
+            xml:space="preserve">
+            <g>
+              <path
+                d="M209.306,50.798c-2.452-3.337-7.147-4.055-10.485-1.602c-3.338,2.453-4.055,7.147-1.603,10.485
+        c54.576,74.266,66.032,123.541,66.032,151.8c0,27.691-8.272,52.794-23.293,70.685c-17.519,20.866-42.972,31.446-75.651,31.446
+        c-73.031,0-98.944-55.018-98.944-102.131c0-52.227,28.103-103.234,51.679-136.829c25.858-36.847,52.11-61.415,52.37-61.657
+        c3.035-2.819,3.209-7.565,0.39-10.6c-2.819-3.034-7.565-3.209-10.599-0.39c-1.11,1.031-27.497,25.698-54.254,63.765
+        c-24.901,35.428-54.586,89.465-54.586,145.71c0,31.062,9.673,59.599,27.236,80.353c20.361,24.061,50.345,36.779,86.708,36.779
+        c36.794,0,66.926-12.726,87.139-36.801c17.286-20.588,26.806-49.117,26.806-80.33C278.25,156.216,240.758,93.597,209.306,50.798z" />
+              <path
+                d="M198.43,148.146l-95.162,95.162c-2.929,2.929-2.929,7.678,0,10.606c1.465,1.464,3.385,2.197,5.304,2.197
+        s3.839-0.732,5.304-2.197l95.162-95.162c2.929-2.929,2.929-7.678,0-10.606C206.107,145.217,201.359,145.217,198.43,148.146z" />
+              <path d="M191.965,207.899c-13.292,0-24.106,10.814-24.106,24.106s10.814,24.106,24.106,24.106s24.106-10.814,24.106-24.106
+        S205.257,207.899,191.965,207.899z M191.965,241.111c-5.021,0-9.106-4.085-9.106-9.106s4.085-9.106,9.106-9.106
+        s9.106,4.085,9.106,9.106S196.986,241.111,191.965,241.111z" />
+              <path d="M125.178,194.162c13.292,0,24.106-10.814,24.106-24.106s-10.814-24.106-24.106-24.106s-24.106,10.814-24.106,24.106
+        S111.886,194.162,125.178,194.162z M125.178,160.949c5.021,0,9.106,4.085,9.106,9.106s-4.085,9.106-9.106,9.106
+        c-5.021,0-9.106-4.085-9.106-9.106S120.156,160.949,125.178,160.949z" />
+            </g>
+          </svg>
+        </div>
+        <div>
+          <p>Humidity</p>
+          <p>
+            {{
+            currentLoc?.current?.humidity
+            ? currentLoc.current.humidity + " %"
+            : "N/A"
+            }}
+          </p>
+        </div>
+      </div>
+      <div class="box-icons">
+        <div>
+          <svg class="icon" viewBox="0 0 24 24" fill="red" xmlns="http://www.w3.org/2000/svg">
+            <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+            <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+            <g id="SVGRepo_iconCarrier">
+              <path
+                d="M13 13L16 8M8 8H8.01M12 6H12.01M18 12H18.01M6 12H6.01M14 15C14 16.1046 13.1046 17 12 17C10.8954 17 10 16.1046 10 15C10 13.8954 10.8954 13 12 13C13.1046 13 14 13.8954 14 15ZM21 12C21 16.9706 16.9706 21 12 21C7.02944 21 3 16.9706 3 12C3 7.02944 7.02944 3 12 3C16.9706 3 21 7.02944 21 12Z"
+                stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+            </g>
+          </svg>
+        </div>
+        <div>
+          <p>Pressure</p>
+          <p>
+            {{
+            currentLoc?.current?.pressure_mb
+            ? currentLoc.current.pressure_mb + " hpa"
+            : "N/A"
+            }}
+          </p>
+        </div>
+      </div>
+      <div class="box-icons">
+        <div>
+          <svg style="fill: gray" class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+            <path
+              d="M288 32c0 17.7 14.3 32 32 32h32c17.7 0 32 14.3 32 32s-14.3 32-32 32H32c-17.7 0-32 14.3-32 32s14.3 32 32 32H352c53 0 96-43 96-96s-43-96-96-96H320c-17.7 0-32 14.3-32 32zm64 352c0 17.7 14.3 32 32 32h32c53 0 96-43 96-96s-43-96-96-96H32c-17.7 0-32 14.3-32 32s14.3 32 32 32H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H384c-17.7 0-32 14.3-32 32zM128 512h32c53 0 96-43 96-96s-43-96-96-96H32c-17.7 0-32 14.3-32 32s14.3 32 32 32H160c17.7 0 32 14.3 32 32s-14.3 32-32 32H128c-17.7 0-32 14.3-32 32s14.3 32 32 32z" />
+          </svg>
+        </div>
+        <div>
+          <p>Wind</p>
+          <p>
+            {{
+            currentLoc?.current?.wind_kph
+            ? currentLoc.current.wind_kph + " Km/h"
+            : "N/A"
+            }}
+          </p>
+        </div>
+      </div>
+      <div class="box-icons">
+        <div>
+          <svg class="icon" style="fill: red" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+            <path
+              d="M464 256A208 208 0 1 0 48 256a208 208 0 1 0 416 0zM0 256a256 256 0 1 1 512 0A256 256 0 1 1 0 256zm349.5 52.4c18.7-4.4 35.9 12 25.5 28.1C350.4 374.6 306.3 400 255.9 400s-94.5-25.4-119.1-63.5c-10.4-16.1 6.8-32.5 25.5-28.1c28.9 6.8 60.5 10.5 93.6 10.5s64.7-3.7 93.6-10.5zM224 192c0 35.3-14.3 64-32 64s-32-28.7-32-64s14.3-64 32-64s32 28.7 32 64zm96 64c-17.7 0-32-28.7-32-64s14.3-64 32-64s32 28.7 32 64s-14.3 64-32 64z" />
+          </svg>
+        </div>
+        <div>
+          <p>Feels like</p>
+          <p>
+            {{
+            currentLoc?.current?.feelslike_c
+            ? currentLoc.current.feelslike_c + ' °C'
+            : "N/A"
+            }}
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <div class="detailed-info">
+      <h6 class="heading-info">Searched History</h6>
+      <div class="day-info">
+        <div class="carousel-container">
+          <div class="icons-box" (click)="moveSlide('prev')"
+          [class.disabled]="!hasPreviousItem()">
+            <svg style="fill: rgb(0, 0, 0)" xmlns="http://www.w3.org/2000/svg" class="icon"  viewBox="0 0 448 512">
+              <path d="M9.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.2 288 416 288c17.7 0 32-14.3 32-32s-14.3-32-32-32l-306.7 0L214.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"/>
+            </svg>
+          </div>
+          <div class="boxes">
+            <div *ngFor="let item of visibleItems" class="box">
+              <div class="historybox">
+                <p>
+                  {{item[1]?.last_updated ? item[1].last_updated.slice(11,16) : 'N/A'}}
+                </p>
+                <span>{{item[1]?.last_updated ? item[1].last_updated.slice(5,9) : 'N/A'}}</span>
+                <p>
+                  <img src="./assets/mist.png" alt="" class="img2" />
+                </p>
+                <p>
+                  {{ item[1]?.condition?.text ? item[1].condition.text : "N/A" }}
+                </p>
+                <p>{{ item[1]?.temp_c ? item[1].temp_c : "N/A" }}</p>
+              </div>
+            </div>
+          </div>
+          <div class="icons-box" (click)="moveSlide('next')"
+          [class.disabled]="!hasNextItem()">
+            <svg style="fill: rgb(0, 0, 0)" xmlns="http://www.w3.org/2000/svg" class="icon"  viewBox="0 0 448 512">
+              <path d="M438.6 278.6c12.5-12.5 12.5-32.8 0-45.3l-160-160c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L338.8 224 32 224c-17.7 0-32 14.3-32 32s14.3 32 32 32l306.7 0L233.4 393.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0l160-160z"/>
+            </svg>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</div>
