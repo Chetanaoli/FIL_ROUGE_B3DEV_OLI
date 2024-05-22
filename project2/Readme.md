@@ -1,68 +1,54 @@
-#Real-Time Geolocation Tracking System
+# Projet Fil Rouge (Système de Suivi en Temps Réel par Géolocalisation)
 
-This project aims to create a robust real-time tracking system based on geolocation data, providing users with an interactive map displaying their current location and historical movements. The system utilizes Angular for the frontend, Node.js for the backend, and MongoDB as the NoSQL database. Additionally, it incorporates external APIs such as Leaflet for geolocation data and OpenWeather for real-time weather conditions. The system ensures security, compliance with GDPR regulations, and horizontal scalability for optimal performance.
+Ce projet se concentre sur le développement d'un système sophistiqué de suivi en temps réel par géolocalisation, fournissant aux utilisateurs une carte interactive affichant leur position actuelle et leurs mouvements historiques. L'application utilise Angular pour le frontend, Node.js pour le backend et MongoDB comme base de données NoSQL. De plus, elle intègre des API externes telles que Leaflet pour la visualisation des données de géolocalisation et OpenWeather pour les informations météorologiques en temps réel. Le système est conçu avec des considérations de sécurité, de conformité au RGPD et de scalabilité horizontale pour assurer des performances optimales et la confidentialité des utilisateurs.
 
-## Features
-Responsive Interface:
+## Fonctionnalités
 
-Utilizes Angular to create a responsive and user-friendly interface.
-Implements CSS for a visually appealing design with animations for enhanced aesthetics.
-Features a single-page application design for seamless user experience.
-Geolocation Data:
+### Interface Réactive
+- **Framework Frontend :** Utilise Angular pour construire une interface très réactive et conviviale.
+- **Design :** Implémente CSS pour un design visuellement attrayant, incluant des animations pour améliorer l'esthétique.
+- **Conception SPA :** Adopte une approche d'application monopage (SPA) pour offrir une expérience utilisateur fluide.
 
-Integrates Leaflet, a free geolocation API, to gather data and display it on an interactive map.
-Records user geolocation data in a MongoDB NoSQL database for historical tracking.
-Weather Information:
+### Données de Géolocalisation
+- **Intégration API :** Intègre l'API Leaflet pour collecter et afficher les données de géolocalisation sur une carte interactive.
+- **Stockage des Données :** Enregistre les données de géolocalisation des utilisateurs dans une base de données NoSQL MongoDB pour le suivi et l'analyse historiques.
 
-Utilizes OpenWeather's free weather API to provide users with real-time weather conditions based on their location.
-Security:
+### Informations Météorologiques
+- **API Météo :** Utilise l'API OpenWeather pour fournir des conditions météorologiques en temps réel en fonction de la localisation actuelle de l'utilisateur.
 
-Implements security features to safeguard geolocation data and ensure user privacy.
-Scalability:
+### Sécurité
+- **Protection des Données :** Implémente des mesures de sécurité robustes pour protéger les données de géolocalisation et garantir la confidentialité des utilisateurs.
 
-Incorporates microservices technologies for horizontal scalability and efficient performance management.
-User Authentication:
+### Scalabilité
+- **Architecture Microservices :** Intègre des technologies de microservices pour permettre la scalabilité horizontale et une gestion efficace des performances.
 
-Enables user login through Google sign-in for a streamlined authentication process.
-GDPR Compliance:
+### Authentification des Utilisateurs
+- **Intégration OAuth :** Permet la connexion des utilisateurs via Google sign-in pour un processus d'authentification sécurisé et simplifié.
 
-Requires users to accept terms of use, ensuring compliance with the General Data Protection Regulation (GDPR).
+### Conformité au RGPD
+- **Conformité Réglementaire :** Demande aux utilisateurs d'accepter les conditions d'utilisation pour assurer la conformité au Règlement Général sur la Protection des Données (RGPD).
+
 ## Installation
 
-Setup Instructions
-Prerequisites
+### Prérequis
+- **Node.js et npm :** Assurez-vous que Node.js et npm (Node Package Manager) sont installés sur votre système.
+- **MongoDB :** Configurez une instance de base de données MongoDB.
 
-Install Node.js and npm (Node Package Manager)
+### Étapes d'Installation
 
-Set up MongoDB database
-
-Installation Steps
-
-Clone the repository:
-
-```bash
-git clone https://github.com/Rudranayak17/MEAN_STACK_WHEATHER_AND_MAP_APP
-
-```
-Install dependencies:
-```bash
-cd geolocation-tracker
-npm install
-ng serve
-```
-## Backend 
-```bash
-cd backend
-npm install
-npm run start 
-```
-## Contributing
-
-Pull requests are welcome. For major changes, please open an issue first
-to discuss what you would like to change.
-
-Please make sure to update tests as appropriate.
-
-## License
-
-[MIT](https://choosealicense.com/licenses/mit/)
+1. **Cloner le Répertoire :**
+   ```bash
+   git clone https://github.com/Chetanaoli/FIL_ROUGE_B3DEV_OLI.git
+   ````
+2. **Installer les Dépendances Frontend :**
+   ```bash
+   cd geolocation-tracker
+   npm install
+   ng serve
+   ```
+3. **Configuration du Backend :**
+   ```bash
+   cd backend
+   npm install
+   npm run start
+   ```

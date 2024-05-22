@@ -9,15 +9,17 @@ import { AfterViewInit, Input, Output, EventEmitter, OnDestroy, } from '@angular
   templateUrl: './leaflet-map.component.html',
   styleUrls: ['./leaflet-map.component.css']
 })
-export class LeafletMapComponent implements AfterViewInit, OnDestroy {
+export class LeafletMapComponent implements OnInit, AfterViewInit, OnDestroy  {
   @Input() searchTerm: string = '';
   @Output() updateMapData: EventEmitter<any> = new EventEmitter<any>();
   @Output() updateCurrentLocData: EventEmitter<any> = new EventEmitter<any>();
   private subscription!: Subscription | undefined
   private map: any;
+  @Input() currentLoc: any;
 
   constructor(private homeService: HomeService) {
   }
+
 
   private async initMap(): Promise<void> {
     // Dynamically import Leaflet only if running in a browser environment
@@ -98,6 +100,10 @@ export class LeafletMapComponent implements AfterViewInit, OnDestroy {
       .then(data => {
         console.log("savedLocationDetails-", data);
         this.updateCurrentLocData.emit(data);
+
+        const latLong = [lat,long];
+        this.updateMap([lat, long],data);
+        
       })
       .catch(error => {
         console.error('Error fetching weather data:', error);
@@ -122,7 +128,7 @@ export class LeafletMapComponent implements AfterViewInit, OnDestroy {
     // Create a div with weather details and set it as a popup on the marker
     const popupContent = `
       <div style="padding: 10px; font-weight:600">
-      <p>Place: ${weatherData.location.name}</p>
+      <p>Lieu: ${weatherData.location.name}</p>
         <p>Temperature: ${weatherData.current.temp_c}°C</p>
       </div>
     `;
@@ -171,7 +177,7 @@ export class LeafletMapComponent implements AfterViewInit, OnDestroy {
   }
 
   private async getCoordinates(searchTerm: string): Promise<[number, number]> {
-    // Replace this with your logic to fetch coordinates based on the search term
+    // ReLieu this with your logic to fetch coordinates based on the search term
     // For simplicity, let's assume a fictional geocoding service
     const response = await fetch(`https://api.weatherapi.com/v1/current.json?key=d0b4be268504482db2c184600232008&q=${searchTerm}`);
     const data = await response.json();

@@ -58,7 +58,7 @@ body {
   color: white;
 }
 
-.input-box::placeholder {
+.input-box::Lieuholder {
   color: white;
 }
 
@@ -157,7 +157,8 @@ h1 {
   justify-content: space-evenly;
   /* gap: 1px; */
   align-items: start;
-  width:80%
+  width:80%;
+  gap: 5px;
 }
 
 .historybox {
@@ -187,6 +188,7 @@ h1 {
 @media (max-width: 576px) {
   .historybox {
     width: 100%; /* Change width to 100% of the screen width */
+    padding: 30px;
   }
 }
 

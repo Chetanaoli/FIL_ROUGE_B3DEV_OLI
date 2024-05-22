@@ -54,16 +54,18 @@ export class HomeComponent {
   ngOnInit() {
     this.retrieveLoggedInUser();
     this.fetchWeatherHistory();
-    // this.updateVisibleItems();
+    //this.updateVisibleItems();
   }
   updateVisibleItems(): void {
+    this.historyData = this.historyData.reverse();
     this.visibleItems = this.historyData.slice(
       this.currentIndex,
       this.currentIndex + this.itemsPerPage
     );
+    // this.visibleItems = this.visibleItems.reverse();
     console.log('Visible items:', this.visibleItems);
   }
-
+  
   private retrieveLoggedInUser(): void {
     // Retrieve user details from sessionStorage
     const storedUser = sessionStorage.getItem('loggedInUser');

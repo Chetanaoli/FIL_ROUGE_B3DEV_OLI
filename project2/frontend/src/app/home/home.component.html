@@ -2,12 +2,20 @@
 
 
   <header class="header">
-    <h2 class="heading top-main-head">Today's weather. Just right!</h2>
-    <div class="md-header">
+    <h2 class="heading top-main-head" *ngIf="searchedLocation?.weatherData?.current.temp_c !== undefined">
+      <span *ngIf="searchedLocation?.weatherData.current.temp_c >= 30">Météo d'aujourd'hui : Chaleur Torride ! ☀️🔥</span>
+      <span *ngIf="searchedLocation?.weatherData.current.temp_c >= 20 && searchedLocation?.weatherData.current.temp_c < 30">Météo d'aujourd'hui : Chaud et Ensoleillé ! 😎🌞</span>
+      <span *ngIf="searchedLocation?.weatherData.current.temp_c >= 10 && searchedLocation?.weatherData.current.temp_c < 20">Météo d'aujourd'hui : Doux et Agréable ! 🌤️😊</span>
+      <span *ngIf="searchedLocation?.weatherData.current.temp_c >= 0 && searchedLocation?.weatherData.current.temp_c < 10">Météo d'aujourd'hui : Brise Fraîche ! 🍃🧥</span>
+      <span *ngIf="searchedLocation?.weatherData.current.temp_c < 0">Météo d'aujourd'hui : Froid Glacial ! ❄️🥶</span>
+    </h2>
+    <h2 class="heading top-main-head" *ngIf="searchedLocation?.weatherData.current.temp_c === undefined">
+      Today's weather: Enjoy the day! 🌈✨
+    </h2>    <div class="md-header">
       <div class="search-bar">
         <form class="form-style" (ngSubmit)="search()">
           <input type="text" [(ngModel)]="searchTerm" id="search-input" required name="searchTerm"
-            placeholder="Enter country or city name" class="input-box" />
+            Lieuholder="Entrez le nom du pays ou de la ville" class="input-box" />
           <button type="submit"><i id="btn" class="ri-search-line"></i></button>
         </form>
       </div>
@@ -21,7 +29,7 @@
   </header>
   <section class="hero-section">
     <div class="leaflet-container">
-      <app-leaflet-map [searchTerm]="searchTerm" (updateMapData)="handleUpdateMapData($event)"
+      <app-leaflet-map [currentLoc]="currentLoc" [searchTerm]="searchTerm" (updateMapData)="handleUpdateMapData($event)"
         (updateCurrentLocData)="handleCurrentLocData($event)">
       </app-leaflet-map>
       <div class="temp-details">
@@ -162,7 +170,7 @@
     </div>
 
     <div class="detailed-info">
-      <h6 class="heading-info">Searched History</h6>
+      <h6 class="heading-info">Histoire précédente</h6>
       <div class="day-info">
         <div class="carousel-container">
           <div class="icons-box" (click)="moveSlide('prev')"
@@ -172,19 +180,29 @@
             </svg>
           </div>
           <div class="boxes">
-            <div *ngFor="let item of visibleItems" class="box">
+            <!-- style="margin-left: 10px; margin-right: 10px;" -->
+            <div  *ngFor="let item of visibleItems" class="box">
+              <!-- style="padding: 30px; "  -->
               <div class="historybox">
-                <p>
-                  {{item[1]?.last_updated ? item[1].last_updated.slice(11,16) : 'N/A'}}
+
+                <p>{{ item[1]?.feelslike_c ? item[1].feelslike_c + ' °C' : "N/A" }}</p>
+
+                <p style="font-size: 10px;">
+                  {{item[0]?.name ? item[0]?.name + ', ' + item[0]?.region + ', ' + item[0]?.country : 'N/A'}}
                 </p>
-                <span>{{item[1]?.last_updated ? item[1].last_updated.slice(5,9) : 'N/A'}}</span>
+
                 <p>
-                  <img src="./assets/mist.png" alt="" class="img2" />
+                  {{item[1]?.last_updated ? item[1].last_updated : 'N/A'}}
+                </p>
+
+                <p>
+                  <img *ngIf="item[1]?.condition?.icon" [src]="item[1]?.condition?.icon" alt="" class="img2" />
                 </p>
                 <p>
                   {{ item[1]?.condition?.text ? item[1].condition.text : "N/A" }}
                 </p>
-                <p>{{ item[1]?.temp_c ? item[1].temp_c : "N/A" }}</p>
+                
+                <!-- <p>{{ item[1]?.feelslike_c ? item[1].feelslike_c + ' °C' : "N/A" }}</p> -->
               </div>
             </div>
           </div>

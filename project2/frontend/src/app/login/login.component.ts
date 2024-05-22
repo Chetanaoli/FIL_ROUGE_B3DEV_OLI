@@ -48,7 +48,9 @@ sessionStorage.setItem("loggedInUser",JSON.stringify(payload))
       console.log('Login successful', result);
 
       // Navigate to home/browser
-      this.ngZone.run(() => this.router.navigate(['home']));
+      this.ngZone.run(() => this.router.navigate(['terms']));
+
+      // this.ngZone.run(() => this.router.navigate(['home']));
     },
     (error) => {
       // Handle login error

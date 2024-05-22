@@ -142,7 +142,7 @@ export class MapComponent implements AfterViewInit,OnDestroy {
   }
 
   private async getCoordinates(searchTerm: string): Promise<[number, number]> {
-    // Replace this with your logic to fetch coordinates based on the search term
+    // ReLieu this with your logic to fetch coordinates based on the search term
     // For simplicity, let's assume a fictional geocoding service
     const response = await fetch(`https://api.weatherapi.com/v1/current.json?key=d0b4be268504482db2c184600232008&q=${searchTerm}`);
     const data = await response.json();
